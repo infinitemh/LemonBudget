@@ -1,67 +1,78 @@
 import React, { Component } from 'react';
-import {Table} from 'reactstrap';
+import { Table } from 'reactstrap';
 
-class Budget extends Component{
-    constructor(props){
-        super(props);
-        this.state = {};
-    }
+function RenderBudgetItem({ budgetItem, parentKey }) {
+	const budgetEntry = () => {
+		return (
+			<tr>
+				<th scope='row'>
+					<strong>{budgetItem.category}</strong>
+				</th>
+				<td className='text-right'>
+					<strong>{budgetItem.budgeted}</strong>
+				</td>
+				<td className='text-right'>
+					<strong>{budgetItem.activity}</strong>
+				</td>
+				<td className='text-right'>
+					<strong>{budgetItem.available}</strong>
+				</td>
+			</tr>
+		);
+	};
+	const renderedEntry = budgetEntry();
+	return <React.Fragment>{renderedEntry}</React.Fragment>;
+}
 
-    render(){
-        return(
-            <div className="container">
-                <div className="container text-center">
-                    <h3 className="text-center">Budget</h3>
-                    <h3 className="text-center">$xx to be budgeted</h3>
-                    <p>
-                        $xx funds for this month
-                    </p>
-                    <p>
-                        $xx overspent last month
-                    </p>
-                    <p>
-                        $xx Budgeted
-                    </p>
-                    <p>
-                        $xx budgted in future
-                    </p>
-                </div>
-                <Table striped bordered hover size="sm" responsive>
-                    <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Budgeted</th>
-                        <th>Activity</th>
-                        <th>Available</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                       
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
- 
-                    </tr>
-                    </tbody>
-                </Table>
-            </div>
-        );
-    };
+function RenderSubcategories({ budgetItem }) {
+	const subcategories = budgetItem.subcategories.map((subcategory) => {
+		return (
+			<tr key={`${budgetItem.id}.${subcategory.id}`}>
+				<th scope='row'>
+					<span className='subcategory-name'>{subcategory.category}</span>
+				</th>
+				<td className='text-right'>{subcategory.budgeted}</td>
+				<td className='text-right'>{subcategory.activity}</td>
+				<td className='text-right'>{subcategory.available}</td>
+			</tr>
+		);
+	});
+	return <React.Fragment>{subcategories}</React.Fragment>;
+}
+
+class Budget extends Component {
+	render() {
+		const budget = this.props.budgetdata.map((category) => {
+			return (
+				<React.Fragment key={`${category.id}`}>
+					<RenderBudgetItem budgetItem={category} />
+					<RenderSubcategories budgetItem={category} />
+				</React.Fragment>
+			);
+		});
+		return (
+			<div className='container'>
+				<div className='container text-center'>
+					<h3 className='text-center'>$3023.12 to be budgeted</h3>
+					<p className='small m-0'>$2000.00 funds for this month</p>
+					<p className='small m-0'>$0.00 overspent last month</p>
+					<p className='small m-0'>$369372.00 Budgeted</p>
+					<p className='small mt-0'>$0.00 budgted in future</p>
+				</div>
+				<Table striped bordered hover size='sm' responsive>
+					<thead className='text-center'>
+						<tr>
+							<th>Category</th>
+							<th>Budgeted</th>
+							<th>Activity</th>
+							<th>Available</th>
+						</tr>
+					</thead>
+					<tbody>{budget}</tbody>
+				</Table>
+			</div>
+		);
+	}
 }
 
 export default Budget;

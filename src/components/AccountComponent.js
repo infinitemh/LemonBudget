@@ -1,61 +1,49 @@
 import React, { Component } from 'react';
-import {Table} from 'reactstrap';
+import { Table } from 'reactstrap';
 
-class Account extends Component{
-    constructor(props){
-        super(props);
-        this.state = {};
-    }
+function RenderTransaction({ transaction }) {
+	return (
+		<React.Fragment>
+			<th scope='row'>{transaction.account}</th>
+			<td>{transaction.date.toLocaleDateString()}</td>
+			<td>{transaction.payee}</td>
+			<td>{transaction.category}</td>
+			<td>{transaction.memo}</td>
+			<td>{transaction.outflow}</td>
+			<td>{transaction.inflow}</td>
+		</React.Fragment>
+	);
+}
 
-    render(){
-        return(
-            <div className="container">
-                <h3 className="text-center">All Accounts</h3>
-                <Table striped bordered hover size="sm" responsive>
-                    <thead>
-                    <tr>
-                        <th>Account</th>
-                        <th>Date</th>
-                        <th>Payee</th>
-                        <th>Category</th>
-                        <th>Memo</th>
-                        <th>Outflow</th>
-                        <th>Inflow</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    </tbody>
-                </Table>
-            </div>
-        );
-    };
+class Account extends Component {
+	render() {
+		const ledger = this.props.accountdata.map((transaction) => {
+			return (
+				<tr key={transaction.id}>
+					<RenderTransaction transaction={transaction} />
+				</tr>
+			);
+		});
+		return (
+			<div className='container'>
+				<h3 className='text-center'>All Accounts</h3>
+				<Table striped bordered hover size='sm' responsive>
+					<thead>
+						<tr>
+							<th>Account</th>
+							<th>Date</th>
+							<th>Payee</th>
+							<th>Category</th>
+							<th>Memo</th>
+							<th>Outflow</th>
+							<th>Inflow</th>
+						</tr>
+					</thead>
+					<tbody>{ledger}</tbody>
+				</Table>
+			</div>
+		);
+	}
 }
 
 export default Account;

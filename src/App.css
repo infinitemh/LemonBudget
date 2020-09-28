@@ -1,42 +1,55 @@
+body {
+	background-color: #f8ffe5 !important;
+}
 /* The sidebar menu */
 .sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 10vw; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: rgb(59, 171, 55); 
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
+	height: 100%; /* Full-height: remove this if you want "auto" height */
+	width: 10vw; /* Set the width of the sidebar */
+	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	background-color: #7dde92;
+	overflow-x: hidden; /* Disable horizontal scroll */
+	padding-top: 20px;
 }
 
 /* The navigation menu links */
 .sidenav .menuitem {
-  text-decoration: none;
-  font-size: 1vw;
-  color: white;
+	text-decoration: none;
+	font-size: 1vw;
+	color: #4e4187;
+	font-weight: bold;
+	letter-spacing: 0.1em;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav .menuitem:hover {
-  color: #f1f1f1;
+	color: #f1f1f1;
 }
 
 /* Style page content */
 .maincomponent {
-  margin-left: 10vw; /* Same as the width of the sidebar */
-  padding: 0px 10px;
+	margin-left: 10vw; /* Same as the width of the sidebar */
+	padding: 0px 10px;
+}
+
+.subcategory-name {
+	padding-left: 1em;
+	font-weight: lighter;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav .menuitem {font-size: 18px;}
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav .menuitem {
+		font-size: 18px;
+	}
 }
 
 .poppins {
-  font-family: 'Poppins',-apple-system, BlinkMacSystemFont, 'Poppins','Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+	font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
